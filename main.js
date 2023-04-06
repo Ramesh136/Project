@@ -74,9 +74,18 @@ function onSubmit(e) {
     setTimeout(() => msg.remove(), 3000);
   } else {
     // Create new list item with user
-    localStorage.setItem(`person `+i , ' '+nameInput.value+',   ' +emailInput.value)
-    console.log(nameInput.value);
-    console.log(emailInput.value);
+
+    let ob = {
+      name : nameInput.value ,
+      email : emailInput.value
+    }
+
+    let obs = JSON.stringify(ob);
+    localStorage.setItem(`person `+i ,obs);
+    
+    let item = localStorage.getItem(`person `+i);
+    let obd = JSON.parse(item);
+    console.log(item);
     //userList.appendChild(li);
     i = i+1 ;
     // Clear fields
