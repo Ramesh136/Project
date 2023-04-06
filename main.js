@@ -63,6 +63,7 @@ var i = 1 ;
 myForm.addEventListener('submit', onSubmit);
 userList.addEventListener('click', removeItem);
 
+
 function onSubmit(e) {
   e.preventDefault();
   
@@ -78,7 +79,6 @@ function onSubmit(e) {
     const li = document.createElement('li');
     const text = nameInput.value+","+emailInput.value;
 
-   console.log(nameInput.value);
     // Add class
     li.className = 'list-group-item';
     // Add text node with input value
@@ -96,6 +96,17 @@ function onSubmit(e) {
      // Append button to li
     li.appendChild(deleteBtn);
 
+
+    var editBtn = document.createElement('button');
+  
+    // Add classes to del button
+    editBtn.className = 'btn btn-danger btn-sm float-right edit';
+  
+    // Append text node
+    editBtn.appendChild(document.createTextNode('edit'));
+
+     // Append button to li
+    li.appendChild(editBtn);
   // Append li to list
     userList.appendChild(li);
 
@@ -127,10 +138,23 @@ function removeItem(e){
 
       localStorage.removeItem(tt);
       userList.removeChild(li);
+    }
+  }
 
+  else if(e.target.classList.contains('edit')){
+    
+      var li = e.target.parentElement;
+      console.log(li.firstChild);
+      var tt = li.firstChild.textContent.split(',')[0];
+      console.log(tt);
+
+      nameInput.value = li.firstChild.textContent.split(',')[0];
+      emailInput.value = li.firstChild.textContent.split(',')[1];
+
+      localStorage.removeItem(tt);
+      userList.removeChild(li);
 
       
-
-    }
+    
   }
 }
