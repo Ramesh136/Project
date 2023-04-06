@@ -5,39 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>JS For Beginners</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
-    <header>
-      <h1>JS For Beginners</h1>
+    <header >
+      <h1 class="col-md-6">Register user</h1>
     </header>
 
     <section class="container">
-      <form id="my-form">
+      <form id="my-form" class="form-group  mb-3>
         <h1>Add User</h1>
         <div class="msg"></div>
         <div>
           <label for="name">Name:</label>
-          <input type="text" id="name">
+          <input type="text" id="name"  class="form-control mr-2">
         </div>
         <div>
           <label for="email">Email:</label>
-          <input type="text" id="email">
+          <input type="text" id="email"  class="form-control mr-2">
         </div>
-        <input class="btn" type="submit" value="Submit">
+        <input class="btn" type="submit" class="btn btn-dark" value="Submit">
       </form>
 
-      <!-- <ul id="users"></ul>
+      <ul id="users"></ul>
 
-      <ul class="items">
-        <li class="item">Item 1</li>
-        <li class="item">Item 2</li>
-        <li class="item">Item 3</li>
-      </ul> -->
+      
+        
+      </ul>
     </section>
     
 
     
   </body>
+  
   <script src="main.js"></script>
 </html>

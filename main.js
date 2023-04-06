@@ -57,10 +57,11 @@ const myForm = document.querySelector('#my-form');
 const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
 const msg = document.querySelector('.msg');
-// const userList = document.querySelector('#users');
+const userList = document.querySelector('#users');
 var i = 1 ;
 // // Listen for form submit
 myForm.addEventListener('submit', onSubmit);
+userList.addEventListener('click', removeItem);
 
 function onSubmit(e) {
   e.preventDefault();
@@ -74,6 +75,29 @@ function onSubmit(e) {
     setTimeout(() => msg.remove(), 3000);
   } else {
     // Create new list item with user
+    const li = document.createElement('li');
+    const text = nameInput.value+","+emailInput.value;
+
+   console.log(nameInput.value);
+    // Add class
+    li.className = 'list-group-item';
+    // Add text node with input value
+    li.appendChild(document.createTextNode(text));
+  
+    // Create del button element
+    var deleteBtn = document.createElement('button');
+  
+    // Add classes to del button
+    deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+  
+    // Append text node
+    deleteBtn.appendChild(document.createTextNode('X'));
+
+     // Append button to li
+    li.appendChild(deleteBtn);
+
+  // Append li to list
+    userList.appendChild(li);
 
     let ob = {
       name : nameInput.value ,
@@ -81,15 +105,32 @@ function onSubmit(e) {
     }
 
     let obs = JSON.stringify(ob);
-    localStorage.setItem(`person `+i ,obs);
-    
-    let item = localStorage.getItem(`person `+i);
+    localStorage.setItem(nameInput.value  ,obs);
+
+    let item = localStorage.getItem(nameInput.value );
     let obd = JSON.parse(item);
-    console.log(item);
-    //userList.appendChild(li);
-    i = i+1 ;
+  
     // Clear fields
     nameInput.value = '';
     emailInput.value = '';
+  }
+}
+
+
+function removeItem(e){
+  if(e.target.classList.contains('delete')){
+    if(confirm('Are You Sure?')){
+      var li = e.target.parentElement;
+      console.log(li.firstChild);
+      var tt = li.firstChild.textContent.split(',')[0];
+      console.log(tt);
+
+      localStorage.removeItem(tt);
+      userList.removeChild(li);
+
+
+      
+
+    }
   }
 }
