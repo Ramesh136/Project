@@ -63,6 +63,23 @@ var i = 1 ;
 myForm.addEventListener('submit', onSubmit);
 userList.addEventListener('click', removeItem);
 
+window.addEventListener("DOMContentLoaded" , loaData)
+
+function loaData(){
+  axios.get("https://crudcrud.com/api/19713b2a350d4081a4a905163161f8c1/userList")
+  .then((response)=>{
+    response.data.forEach(element => {
+      var li = document.createElement('li');
+      var text = element.name+","+element.email;
+      console.log(element)
+      // Add class
+      li.className = 'list-group-item';
+      // Add text node with input value
+      li.appendChild(document.createTextNode(text));
+      userList.appendChild(li);
+    });
+  })
+}
 
 function onSubmit(e) {
   e.preventDefault();
