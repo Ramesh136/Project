@@ -118,6 +118,17 @@ function onSubmit(e) {
     let obs = JSON.stringify(ob);
     localStorage.setItem(nameInput.value  ,obs);
 
+    axios.post("https://crudcrud.com/api/19713b2a350d4081a4a905163161f8c1/userList" , {
+      name : nameInput.value ,
+      email : emailInput.value
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
     let item = localStorage.getItem(nameInput.value );
     let obd = JSON.parse(item);
   
