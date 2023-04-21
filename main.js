@@ -51,7 +51,7 @@ const btn = document.querySelector('.btn');
 
 
 // // USER FORM SCRIPT
-
+//axios.defaults.headers.common['Access-Control-Allow-Origin'] = "https://crudcrud.com/api/19713b2a350d4081a4a905163161f8c1/userList"
 // // Put DOM elements into variables
 const myForm = document.querySelector('#my-form');
 const nameInput = document.querySelector('#name');
@@ -70,12 +70,35 @@ function loaData(){
   .then((response)=>{
     response.data.forEach(element => {
       var li = document.createElement('li');
-      var text = element.name+","+element.email;
+      var text = element.name+","+element.email+","+element._id;
       console.log(element)
       // Add class
       li.className = 'list-group-item';
       // Add text node with input value
       li.appendChild(document.createTextNode(text));
+
+      var deleteBtn = document.createElement('button');
+  
+      // Add classes to del button
+      deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+    
+      // Append text node
+      deleteBtn.appendChild(document.createTextNode('X'));
+  
+       // Append button to li
+      li.appendChild(deleteBtn);
+  
+  
+      var editBtn = document.createElement('button');
+    
+      // Add classes to del button
+      editBtn.className = 'btn btn-danger btn-sm float-right edit';
+    
+      // Append text node
+      editBtn.appendChild(document.createTextNode('edit'));
+  
+       // Append button to li
+      li.appendChild(editBtn);
       userList.appendChild(li);
     });
   })
@@ -161,11 +184,14 @@ function removeItem(e){
     if(confirm('Are You Sure?')){
       var li = e.target.parentElement;
       console.log(li.firstChild);
-      var tt = li.firstChild.textContent.split(',')[0];
-      console.log(tt);
+      var tt = li.firstChild.textContent.split(',')[2];
+      
 
+      axios.delete(`https://crudcrud.com/api/19713b2a350d4081a4a905163161f8c1/userListhttps://crudcrud.com/api/19713b2a350d4081a4a905163161f8c1/userList/${tt}`)
       localStorage.removeItem(tt);
       userList.removeChild(li);
+
+      
     }
   }
 
