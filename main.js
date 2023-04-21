@@ -71,7 +71,7 @@ function loaData(){
     response.data.forEach(element => {
       var li = document.createElement('li');
       var text = element.name+","+element.email+","+element._id;
-      console.log(element)
+      console.log(element.name)
       // Add class
       li.className = 'list-group-item';
       // Add text node with input value
@@ -83,7 +83,7 @@ function loaData(){
       deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
     
       // Append text node
-      deleteBtn.appendChild(document.createTextNode('X'));
+      deleteBtn.appendChild(document.createTextNode('delete'));
   
        // Append button to li
       li.appendChild(deleteBtn);
@@ -131,7 +131,7 @@ function onSubmit(e) {
     deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
   
     // Append text node
-    deleteBtn.appendChild(document.createTextNode('X'));
+    deleteBtn.appendChild(document.createTextNode('delete'));
 
      // Append button to li
     li.appendChild(deleteBtn);
@@ -163,7 +163,7 @@ function onSubmit(e) {
       email : emailInput.value
     })
     .then(function (response) {
-      console.log(response);
+      console.log(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -204,6 +204,9 @@ function removeItem(e){
 
       nameInput.value = li.firstChild.textContent.split(',')[0];
       emailInput.value = li.firstChild.textContent.split(',')[1];
+      var id = li.firstChild.textContent.split(',')[2];
+
+      axios.delete(`https://crudcrud.com/api/19713b2a350d4081a4a905163161f8c1/userListhttps://crudcrud.com/api/19713b2a350d4081a4a905163161f8c1/userList/${id}`)
 
       localStorage.removeItem(tt);
       userList.removeChild(li);
